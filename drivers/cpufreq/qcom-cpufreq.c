@@ -400,21 +400,6 @@ static struct cpufreq_frequency_table *cpufreq_parse_dt(struct device *dev,
 			break;
 		f /= 1000;
 
-#ifdef CONFIG_MACH_MSM8996_15801
-		if (i > 0) {
-			/* Always underclock power cluster for stability */
-			if (cpu < 2) {
-				if (ftbl[i - 1].frequency ==
-						underclk_max_pwrcl)
-					break;
-			} else if (!no_cpu_underclock) {
-				if (ftbl[i - 1].frequency ==
-						underclk_max_perfcl)
-					break;
-			}
-		}
-#endif
-
 		/*
 		 * Don't repeat frequencies if they round up to the same clock
 		 * frequency.
@@ -426,6 +411,21 @@ static struct cpufreq_frequency_table *cpufreq_parse_dt(struct device *dev,
 		ftbl[j].driver_data = j;
 		ftbl[j].frequency = f;
 		j++;
+
+#ifdef CONFIG_MACH_MSM8996_15801
+		/* Always underclock power cluster for stability */
+		if (cpu < 2) {
+			if (f == underclk_max_pwrcl) {
+				i++;
+				break;
+			}
+		} else if (!no_cpu_underclock) {
+			if (f == underclk_max_perfcl) {
+				i++;
+				break;
+			}
+		}
+#endif
 	}
 
 	ftbl[j].driver_data = j;
