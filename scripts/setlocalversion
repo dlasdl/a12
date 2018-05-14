@@ -190,8 +190,9 @@ res="${res}${CONFIG_LOCALVERSION}${LOCALVERSION}"
 	# LOCALVERSION= is not specified
 	#if test "${LOCALVERSION+set}" != "set"; then
 		scm=$(scm_version --short)
-		res="$res$(scm)"
-	#fi
-#fi
+
+	fi
+fi
+
 
 echo "$res"
