@@ -2232,8 +2232,10 @@ static int get_monotonic_soc_raw(struct fg_chip *chip)
 #define DEFAULT_CAPACITY	50
 #define MISSING_CAPACITY	100
 #define FULL_CAPACITY		100
+#define FULL_SOC_RAW		0xFC
+#else
 #define FULL_SOC_RAW		0xFF
-
+#endif
 static int bound_soc(int soc)
 {
         soc = max(0, soc);
