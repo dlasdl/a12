@@ -23,14 +23,6 @@
 	qcom,board-id = <8 0 15811 27>, <8 0 15811 28>;
 };
 
-&i2c_6 {
-	bq27541-battery@55 {
-		oem,support-4p4v-battery;
-		op,low-bat-voltage-uv=<3250000>;
-		op,low-bat-capacity=<20>;
-	};
-};
-
 &cam_sensor_mclk2_active {
 	config {
 		drive-strength = <6>; /* 2 MA */
